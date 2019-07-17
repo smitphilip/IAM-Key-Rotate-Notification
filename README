@@ -1,0 +1,2 @@
+AWS Lambda function - Checks IAM security keys for all users, compares their age to an maximum age value configured, and sends the Admin a notification via Telegram
+
