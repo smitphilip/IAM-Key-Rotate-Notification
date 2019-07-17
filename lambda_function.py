@@ -17,25 +17,6 @@ def lambda_handler(event, context):
     IAMCLIENT = boto3.client('iam')
     USERS = []
     KEYLIST = []
-    FUNCimport json, configparser, calendar, boto3, datetime, requests
-
-NOW = datetime.datetime.now().strftime("%Y-%m-%d")
-CURRDATE = datetime.datetime.strptime(NOW, '%Y-%m-%d')
-
-REGION = 'eu-west-1'
-CONFIGPATH = 'keyrotationConfig.txt'
-config = configparser.ConfigParser()
-config.read(CONFIGPATH)
-
-USER_MAX_KEY_AGE = config['KEY']['AGE']
-TELEGRAM_BOT_TOKEN = config['SECURITY']['BOT_TOKEN']
-CHAT_ID = config['SECURITY']['CHAT_ID']
-TGRAMURL = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage?chat_id=' + CHAT_ID + '&text='
-
-def lambda_handler(event, context):
-    IAMCLIENT = boto3.client('iam')
-    USERS = []
-    KEYLIST = []
     RESPONSE = IAMCLIENT.list_users()
     NUMUSERS = len(RESPONSE['Users'])
     
@@ -61,9 +42,9 @@ def lambda_handler(event, context):
     if len(KEYLIST) > 0:        
         MSG = '\n'.join(map(str, KEYLIST))
         RESPONSE = requests.post(TGRAMURL + MSG)
-OUTPUT = ""
-    RESPONSE = IAMCLIENT.list_users()
-    NUMUSERS = len(RESPONSE['Users'])
+        OUTPUT = ""
+        RESPONSE = IAMCLIENT.list_users()
+        NUMUSERS = len(RESPONSE['Users'])
     
     for INDEX in range(NUMUSERS):
       USERS.append(RESPONSE['Users'][INDEX]['UserName'])
