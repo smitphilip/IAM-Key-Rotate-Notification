@@ -5,4 +5,5 @@ CHAT_ID=987654321
 [KEY]
 AGE=85
 
-
+[PROFILE]
+REGION=eu-west-1

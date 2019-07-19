@@ -3,11 +3,11 @@ import json, configparser, calendar, boto3, datetime, requests
 NOW = datetime.datetime.now().strftime("%Y-%m-%d")
 CURRDATE = datetime.datetime.strptime(NOW, '%Y-%m-%d')
 
-REGION = 'eu-west-1'
 CONFIGPATH = 'keyrotationConfig.txt'
 config = configparser.ConfigParser()
 config.read(CONFIGPATH)
 
+REGION = config['PROFILE']['REGION']
 USER_MAX_KEY_AGE = config['KEY']['AGE']
 TELEGRAM_BOT_TOKEN = config['SECURITY']['BOT_TOKEN']
 CHAT_ID = config['SECURITY']['CHAT_ID']
